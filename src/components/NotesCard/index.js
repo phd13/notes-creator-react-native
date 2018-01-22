@@ -1,29 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Button from '../../components/Button';
 
 export const NotesCard = (props) => {
 	return (
 		<View style={styles.container}>
 			<Text style={{width: '80%'}}>{props.text} {props.id}</Text>
 			<View style={styles.buttons}>
-				<TouchableOpacity
-					activeOpacity={0.8}
-					onPress={props.onDelete}
-					style={{
-					borderWidth: 1, width: '50%', justifyContent: 'center',
-					alignItems: 'center'
-				}}>
-					<Text>X</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					activeOpacity={0.8}
-					onPress={props.onAdd}
-					style={{
-					borderWidth: 1, width: '50%', justifyContent: 'center',
-					alignItems: 'center'
-				}}>
-					<Text>+</Text>
-				</TouchableOpacity>
+				<Button text='x' action={props.handleDelete}/>
+				<Button text='+' action={props.handleAdd}/>
 			</View>
 		</View>
 	)
