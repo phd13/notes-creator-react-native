@@ -1,0 +1,6 @@
+export const actionTypes = {
+	ADD_NOTE: 'ADD_NOTE',
+	DELETE_NOTE: 'DELETE_NOTE',
+	LOAD_NOTES: 'LOAD_NOTES',
+	SAVE_NOTES: 'SAVE_NOTES'
+};
