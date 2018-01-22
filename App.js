@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
 	StyleSheet,
@@ -13,24 +7,25 @@ import {
 	AsyncStorage
 } from 'react-native';
 import {connect} from 'react-redux';
+import {actionTypes} from './src/constants/actionTypes';
 import {NotesCard} from './src/components/NotesCard';
-import {store} from "./src/store/index";
+import {store} from './src/store/index';
 
 class App extends Component<{}> {
 
 	handleAdd = () => {
 		this.props.dispatch({
-			type: 'ADD_NOTE',
+			type: actionTypes.ADD_NOTE,
 			payload: {
 				id: Math.floor(Math.random() * 1000),
-				text: 'I\'m the new card, hello!'
+				text: 'I\'m the new note, hello!'
 			}
 		})
 	};
 
 	handleDelete = (id) => {
 		this.props.dispatch({
-			type: 'DELETE_NOTE',
+			type: actionTypes.DELETE_NOTE,
 			payload: id
 		})
 	};
@@ -49,7 +44,7 @@ class App extends Component<{}> {
 				{this.props.notes.map((item, index) => (
 					<NotesCard
 						key={index}
-						onAdd={this.handleAdd}
+						onAdd={() => this.handleAdd}
 						onDelete={() => this.handleDelete(item.id)}
 						text={item.text}
 						id={item.id}

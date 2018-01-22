@@ -7,8 +7,8 @@ export const NotesCard = (props) => {
 		<View style={styles.container}>
 			<Text style={{width: '80%'}}>{props.text} {props.id}</Text>
 			<View style={styles.buttons}>
-				<Button text='x' action={props.handleDelete}/>
-				<Button text='+' action={props.handleAdd}/>
+				<Button text='x' action={props.onDelete}/>
+				<Button text='+' action={props.onAdd}/>
 			</View>
 		</View>
 	)
