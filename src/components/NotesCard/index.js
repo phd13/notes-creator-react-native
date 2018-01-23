@@ -5,7 +5,7 @@ import Button from '../../components/Button';
 export const NotesCard = (props) => {
 	return (
 		<View style={styles.container}>
-			<Text style={{width: '80%'}}>{props.text} {props.id}</Text>
+			<Text style={{width: '80%'}}>{props.text}</Text>
 			<View style={styles.buttons}>
 				<Button text='x' action={props.onDelete}/>
 				<Button text='+' action={props.onAdd}/>

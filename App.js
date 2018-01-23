@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
 	StyleSheet,
 	Text,
-	View,
 	ScrollView,
 	AsyncStorage
 } from 'react-native';
@@ -10,10 +9,12 @@ import {connect} from 'react-redux';
 import {actionTypes} from './src/constants/actionTypes';
 import {NotesCard} from './src/components/NotesCard';
 import {store} from './src/store/index';
+import {addNote, deleteNote, loadNotes} from './src/actions/index';
 
 class App extends Component<{}> {
 
 	handleAdd = () => {
+
 		this.props.dispatch({
 			type: actionTypes.ADD_NOTE,
 			payload: {
@@ -24,14 +25,28 @@ class App extends Component<{}> {
 	};
 
 	handleDelete = (id) => {
+
 		this.props.dispatch({
 			type: actionTypes.DELETE_NOTE,
 			payload: id
 		})
 	};
 
+	componentDidMount() {
+		AsyncStorage.getItem('notes', (err, res) => {
+
+			this.props.dispatch({
+				type: actionTypes.LOAD_NOTES,
+				payload: JSON.parse(res).notesData
+			})
+		})
+	}
+
+	componentWillReceiveProps() {
+		AsyncStorage.setItem('notes', JSON.stringify(store.getState()))
+	}
+
 	render() {
-		console.log(store.getState());
 		return (
 			<ScrollView
 				style={styles.container}
@@ -44,7 +59,7 @@ class App extends Component<{}> {
 				{this.props.notes.map((item, index) => (
 					<NotesCard
 						key={index}
-						onAdd={() => this.handleAdd}
+						onAdd={this.handleAdd}
 						onDelete={() => this.handleDelete(item.id)}
 						text={item.text}
 						id={item.id}
